@@ -5,9 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node ./build/index.js",
-    "build": "tsc -p . --outDir build && cp -r ./src/public ./build/public",
-    "dev": "ts-node-dev ./src/index.ts",
-    "tsc": "tsc"
+    "build": "tsc",
+    "dev": "ts-node-dev ./src/index.ts"
   },
   "keywords": [],
   "author": "Francisco Briz",
