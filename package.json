@@ -4,8 +4,8 @@
   "description": "api rest para el hito 1er trimestre de la asignatura de entorno cliente",
   "main": "src/index.js",
   "scripts": {
+    "build": "npm install && tsc",
     "start": "node ./build/index.js",
-    "build": "tsc",
     "dev": "ts-node-dev ./src/index.ts"
   },
   "keywords": [],
