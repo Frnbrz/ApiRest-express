@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt'
-import { newLoginEntry, newUserEntry } from '../types/types'
+import { newLoginEntry, newProductEntry, newUserEntry } from '../types/types'
 
 export function toNewUserEntry(object: any): newUserEntry {
   const newUserEntry: newUserEntry = {
@@ -9,6 +9,18 @@ export function toNewUserEntry(object: any): newUserEntry {
   }
 
   return newUserEntry
+}
+
+export function toNewProductEntry(object: any): newProductEntry {
+  const newProductEntry: newProductEntry = {
+    name: parseName(object.name),
+    category: parseCategory(object.category),
+    price: parsePrice(object.price),
+    stock: parseStock(object.stock),
+    img: parseImg(object.img)
+  }
+
+  return newProductEntry
 }
 
 export function toNewLoginEntry(object: any): newLoginEntry {
@@ -58,4 +70,46 @@ function encryptPassword(password: string): string {
   const passwordEncrypt = bcrypt.hashSync(password, saltRounds)
 
   return passwordEncrypt
+}
+
+function parseCategory(categoryFromRequest: string): string {
+  if (!isString(categoryFromRequest) || isUndefined(categoryFromRequest)) {
+    throw new Error('Incorrect or missing category')
+  }
+
+  return categoryFromRequest
+}
+
+function parsePrice(priceFromRequest: number): number {
+  if (
+    isUndefined(priceFromRequest) ||
+    isNaN(priceFromRequest) ||
+    priceFromRequest < 0
+  ) {
+    throw new Error('Incorrect or missing price')
+  }
+  return priceFromRequest
+}
+
+function parseStock(stockFromRequest: number): number {
+  if (
+    isUndefined(stockFromRequest) ||
+    isNaN(stockFromRequest) ||
+    stockFromRequest < 0
+  ) {
+    throw new Error('Incorrect or missing price')
+  }
+  return stockFromRequest
+}
+
+function parseImg(imgFromRequest: string): string {
+  if (
+    !isString(imgFromRequest) ||
+    isUndefined(imgFromRequest) ||
+    imgFromRequest === ''
+  ) {
+    throw new Error('Incorrect or missing img')
+  }
+
+  return imgFromRequest
 }
