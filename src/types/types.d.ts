@@ -1,13 +1,17 @@
+import { Role } from './enums'
+
 export interface User {
   id: number
   name: string
   email: string
+  description: string
+  role: Role
   password: string
 }
 
-export type newUserEntry = Omit<User, 'id'>
+export type newUserEntry = Omit<User, 'id', 'password'>
 
-export type newLoginEntry = Omit<User, 'id', 'name'>
+export type newLoginEntry = Omit<User, 'id', 'name', 'role', 'description'>
 
 export interface Product {
   id: number
